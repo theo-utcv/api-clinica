@@ -2,3 +2,4 @@
 node_modules/
 
 # Archivos de configuracion
+.env
