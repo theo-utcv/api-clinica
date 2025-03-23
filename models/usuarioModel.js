@@ -24,13 +24,13 @@ class Usuario {
   }
 
   static async create(data) {
-    const { nombreUsuario, correo, contrasenia } = data;
+    const { idRoles, nombreUsuario, correo, contrasenia } = data;
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(contrasenia, salt);
     
     const result = await pool.query(
-      'INSERT INTO usuarios (nombreUsuario, correo, contrasenia, created_at) VALUES ($1, $2, $3, NOW()) RETURNING *',
-      [nombreUsuario, correo, hashedPassword]
+      'INSERT INTO usuarios ( idRoles, nombreUsuario, correo, contrasenia, created_at) VALUES ($1, $2, $3, $4, NOW()) RETURNING *',
+      [ idRoles, nombreUsuario, correo, hashedPassword]
     );
     return result.rows[0];
   }
@@ -39,9 +39,12 @@ class Usuario {
 
     const { idRoles, nombreUsuario, correo, contrasenia } = data;
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(contrasenia, salt);
+
     const result = await pool.query(
-      'UPDATE usuarios SET idRoles = $1, nombreUsuario = $2, correo = $3, contrasenia = PGP_SYM_ENCRYPT($4, $5), updated_at = NOW() WHERE idUsuarios = $6 AND deleted_at is null RETURNING *',
-      [idRoles, nombreUsuario, correo, contrasenia, 'AES_KEY', id]
+      'UPDATE usuarios SET idRoles = $1, nombreUsuario = $2, correo = $3, contrasenia = $4, updated_at = NOW() WHERE idUsuarios = $5 AND deleted_at is null RETURNING *',
+      [idRoles, nombreUsuario, correo, hashedPassword, id]
     );
 
     return result.rows[0];
