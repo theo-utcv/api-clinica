@@ -24,7 +24,9 @@ class ProductoController {
 
     static async createProducto(req, res) {
         try {
-            const producto = await Producto.create(req.body);
+            const { idTipoProducto, precio, nombre, stock } = req.body;
+            const foto = req.file ? req.file.path : null; // Obtener la URL de la imagen de Cloudinary
+            const producto = await Producto.create({ idTipoProducto, precio, nombre, stock, foto });
             res.status(201).json(producto);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -33,7 +35,9 @@ class ProductoController {
 
     static async updateProducto(req, res) {
         try {
-            const producto = await Producto.update(req.params.id, req.body);
+            const { idTipoProducto, precio, nombre, stock } = req.body;
+            const foto = req.file ? req.file.path : null; // Obtener la URL de la imagen de Cloudinary
+            const producto = await Producto.update(req.params.id, { idTipoProducto, precio, nombre, stock, foto });
             if (!producto) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
