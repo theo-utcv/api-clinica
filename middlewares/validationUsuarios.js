@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 
 const validateUsuario = [
-    body('idRol').notEmpty().withMessage('El IDrol es requerido'),
+    body('idRoles').notEmpty().withMessage('El idRoles es requerido'),
     body('nombreUsuario').notEmpty().withMessage('El nombre de usuario es requerido'),
     body('correo').notEmpty().withMessage('El correo es requerido'),
     body('contrasenia').notEmpty().withMessage('La contraseña es requerida'),
