@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const rolRouter = require('./routes/rolRoute');
+const usuarioRouter = require('./routes/usuarioRoute');
 
 require('dotenv').config();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api', rolRouter);
+app.use('/api', usuarioRouter);
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
