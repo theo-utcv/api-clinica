@@ -23,6 +23,11 @@ class Usuario {
     return result.rows;
   }
 
+  static async findByEmail(correo) { // Método para buscar por correo
+    const result = await pool.query('SELECT * FROM usuarios WHERE correo = $1 AND deleted_at IS NULL', [correo]);
+    return result.rows[0]; // Devuelve el primer usuario encontrado o undefined
+  }
+
   static async create(data) {
     const { idRoles, nombreUsuario, correo, contrasenia } = data;
     const salt = await bcrypt.genSalt(10);
