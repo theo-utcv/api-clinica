@@ -5,6 +5,7 @@ const rolRouter = require('./routes/rolRoute');
 const usuarioRouter = require('./routes/usuarioRoute');
 const authRoutes = require('./routes/auth')
 const productoRouter = require('./routes/productoRoute.js')
+const ventaController = require('./controllers/ventaController.js')
 
 require('dotenv').config();
 
@@ -16,6 +17,7 @@ app.use('/api', rolRouter);
 app.use('/api', usuarioRouter);
 app.use('/api/auth', authRoutes);
 app.use('/api', productoRouter);
+app.use('/api', ventaController);
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
