@@ -5,6 +5,37 @@ const jwt = require('jsonwebtoken'); // Importar jwt
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: API para autenticacion
+ */
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Inicia Sesion
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               correo:
+ *                 type: string
+ *               contrasenia:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Login Exitoso
+ *       500:
+ *         description: Error en el servidor
+ */
+
 // Login
 router.post('/login', async (req, res) => {
     const { correo, contrasenia } = req.body; // Cambia 'email' a 'correo' y 'password' a 'contrasenia'
@@ -42,6 +73,32 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
     res.json({ message: 'Logout exitoso' });
 });
+
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Registro
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nombreUsuario:
+ *                 type: string
+ *               correo:
+ *                 type: string
+ *               contrasenia:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Registro Exitoso
+ *       500:
+ *         description: Error en el servidor
+ */
 
 // Registro
 router.post('/register', async (req, res) => {
