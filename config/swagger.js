@@ -6,15 +6,24 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'API de la Clinica Reactivando Vidas',
+      title: 'API de la Clinica Reactivando vidas',
       version: '1.0.0',
-      description: 'Documentación de la API para la gestión CRUD para la Clinica Reactivando Vidas',
+      description: 'Documentación de la API para la gestión CRUD',
     },
     servers: [
       {
         url: 'http://localhost:3000/api',
       },
     ],
+    components: {
+      securitySchemes: {
+        BearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
   },
   apis: ['./routes/*.js'], // Ruta a los archivos donde se encuentran las definiciones de las rutas
 };

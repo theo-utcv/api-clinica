@@ -115,6 +115,8 @@ rolRouter.post('/roles', validateRol, RolController.createRol);
  *             properties:
  *               tipo:
  *                 type: string
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: Rol actualizado
@@ -138,6 +140,8 @@ rolRouter.put('/roles/:id', authenticate, validateRol, RolController.updateRol);
  *         description: ID del rol
  *         schema:
  *           type: integer
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: Rol eliminado
