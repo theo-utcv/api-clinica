@@ -1,16 +1,21 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const rolRouter = require('./routes/rolRoute');
 const usuarioRouter = require('./routes/usuarioRoute');
-const authRoutes = require('./routes/auth')
-const productoRouter = require('./routes/productoRoute.js')
+const authRoutes = require('./routes/auth');
+const productoRouter = require('./routes/productoRoute.js');
+const { swaggerUi, swaggerDocs } = require('./config/swagger.js'); // Importa Swagger
 
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Documentación de Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use('/api', rolRouter);
 app.use('/api', usuarioRouter);
