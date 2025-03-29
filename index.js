@@ -6,8 +6,9 @@ const rolRouter = require('./routes/rolRoute');
 const usuarioRouter = require('./routes/usuarioRoute');
 const authRoutes = require('./routes/auth')
 const productoRouter = require('./routes/productoRoute.js')
-const ventaController = require('./controllers/ventaController.js')
+const ventaRouter = require('./controllers/ventaController.js')
 const { swaggerUi, swaggerDocs } = require('./config/swagger.js'); // Importa Swagger
+const configRoutes = require('./routes/configRoutes');
 
 require('dotenv').config();
 
@@ -22,7 +23,9 @@ app.use('/api', rolRouter);
 app.use('/api', usuarioRouter);
 app.use('/api/auth', authRoutes);
 app.use('/api', productoRouter);
-app.use('/api', ventaController);
+app.use('/api', configRoutes);
+app.use('/api', ventaRouter);
+
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
